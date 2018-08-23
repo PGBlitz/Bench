@@ -280,20 +280,6 @@ cdnspeedtest () {
 	echo "" | tee -a $log
 	speed "CacheFly :" "http://cachefly.cachefly.net/100mb.test"
 	speed "CDN.net  :" "http://993660212.r.worldcdn.net/100MB.bin"
-
-	# google drive speed test
-	TMP_COOKIES="/tmp/cookies.txt"
-	TMP_FILE="/tmp/gdrive"
-	DRIVE="drive.google.com"
-	FILE_ID="1EcDdTYwJNBIXx_BL6pzEkjTD_pkCbYni"
-
-	printf " G-Drive   :"  | tee -a $log
-	curl -c $TMP_COOKIES -o $TMP_FILE -s "https://$DRIVE/uc?id=$FILE_ID&export=download"
-	D_ID=$( grep "confirm=" < $TMP_FILE | awk -F "confirm=" '{ print $NF }' | awk -F "&amp" '{ print $1 }' )
-	C_DL=$( curl -m 4 -Lb $TMP_COOKIES -w '%{speed_download}\n' -o $NULL \
-		-s "https://$DRIVE/uc?export=download&confirm=$D_ID&id=$FILE_ID" )
-	printf "%s\n" "$(FormatBytes $C_DL) $(pingtest $DRIVE)" | tee -a $log
-	echo "" | tee -a $log
 }
 
 # 10 location (1GB)
