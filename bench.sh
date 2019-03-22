@@ -279,7 +279,7 @@ cdnspeedtest () {
 	echostyle "## CDN Speedtest"
 	echo "" | tee -a $log
 	speed "CacheFly :" "http://cachefly.cachefly.net/100mb.test"
-	speed "CDN.net  :" "http://993660212.r.worldcdn.net/100MB.bin"
+	speed "CDN.net  :" "http://219848522.r.worldcdn.net/100MB.bin"
 }
 
 # 10 location (1GB)
